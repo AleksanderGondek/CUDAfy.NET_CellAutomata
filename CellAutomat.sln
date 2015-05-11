@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellAutomat", "CellAutomat\CellAutomat.csproj", "{0938B7F0-00A6-4E57-B3BF-D86B1F8E963C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupMatrixCreator", "StartupMatrixCreator\StartupMatrixCreator.csproj", "{8996EFF8-699D-4B98-940E-5F7756DAFA80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0938B7F0-00A6-4E57-B3BF-D86B1F8E963C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0938B7F0-00A6-4E57-B3BF-D86B1F8E963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0938B7F0-00A6-4E57-B3BF-D86B1F8E963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0938B7F0-00A6-4E57-B3BF-D86B1F8E963C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8996EFF8-699D-4B98-940E-5F7756DAFA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8996EFF8-699D-4B98-940E-5F7756DAFA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8996EFF8-699D-4B98-940E-5F7756DAFA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8996EFF8-699D-4B98-940E-5F7756DAFA80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
