@@ -2,28 +2,27 @@
 
 namespace CellAutomat.Data
 {
-    internal sealed class DataCreator
+    public sealed class DataCreator : IDataCreator
     {
-        private readonly int _matrixSize;
-        private readonly int _chanceOfTrue;
-        private readonly Random _randomGenerator;
+        public int MatrixSize { get; set; }
+        public int ChanceOfTrue { get; set; }
+
+        private Random _randomGenerator = new Random((int)DateTime.Now.Ticks);
         private bool[,,] _matrix;
 
-        internal DataCreator(int matrixSize, int chanceOfTrue)
+        public bool[,,] CreateStartupMatrix()
         {
-            _matrixSize = matrixSize;
-            _chanceOfTrue = chanceOfTrue;
-            _randomGenerator = new Random((int)DateTime.Now.Ticks); 
-        }
-
-        internal bool[,,] CreateStartupMatrix()
-        {
-            _matrix = new bool[_matrixSize, _matrixSize, _matrixSize];
-            for (var z = 0; z < _matrixSize; z++)
+            if (MatrixSize <= 0 || ChanceOfTrue <= 0)
             {
-                for (var x = 0; x < _matrixSize; x++)
+                throw new Exception("No valid parameters for matrix size / chance of cell being alive were supplied!");
+            }
+
+            _matrix = new bool[MatrixSize, MatrixSize, MatrixSize];
+            for (var z = 0; z < MatrixSize; z++)
+            {
+                for (var x = 0; x < MatrixSize; x++)
                 {
-                    for (var y = 0; y < _matrixSize; y++)
+                    for (var y = 0; y < MatrixSize; y++)
                     {
                         _matrix[x, y, z] = GetValue();
                     }
@@ -35,7 +34,12 @@ namespace CellAutomat.Data
 
         private bool GetValue()
         {
-            return _randomGenerator.Next(100) < _chanceOfTrue;
+            return _randomGenerator.Next(100) < ChanceOfTrue;
+        }
+
+        public void Dispose()
+        {
+            _randomGenerator = null;
         }
     }
 }

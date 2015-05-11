@@ -4,9 +4,9 @@ namespace CellAutomat.Data
 {
     internal static class DataWriter
     {
-        internal static void SaveMatrix(bool[,,] matrix, string path)
+        internal static void SaveMatrix(bool[,,] matrix, string fileName)
         {
-            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+            using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             using (var streamWriter = new StreamWriter(fileStream))
             {
                 var matrixSize = matrix.GetLength(0);

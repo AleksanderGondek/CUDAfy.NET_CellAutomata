@@ -4,18 +4,12 @@ using System.Text.RegularExpressions;
 
 namespace CellAutomat.Data
 {
-    internal sealed class DataLoader
+    public sealed class DataLoader : IDataLoader
     {
         private bool[,,] _matrix;
-        private readonly string _path;
-        private readonly Regex _regex = new Regex(@"{([0-9]\d*),([0-9]\d*),([0-9]\d*)}=(true|false)", RegexOptions.IgnoreCase);
+        private Regex _regex = new Regex(@"{([0-9]\d*),([0-9]\d*),([0-9]\d*)}=(true|false)", RegexOptions.IgnoreCase);
 
-        internal DataLoader(string path)
-        {
-            _path = path;
-        }
-
-        internal bool[,,] LoadMatrix()
+        public bool[,,] LoadMatrix()
         {
             ReadFile();
             return _matrix;
@@ -23,7 +17,7 @@ namespace CellAutomat.Data
 
         private void ReadFile()
         {
-            using (var streamReader = new StreamReader(_path))
+            using (var streamReader = new StreamReader(AppConfigHelper.GetValueFromAppSettings(@"CellMatrixDataLocation")))
             {
                 string line;
                 var isFirstLine = true;
@@ -62,6 +56,11 @@ namespace CellAutomat.Data
             var isAlive = Convert.ToBoolean(matches.Groups[4].Value);
 
             _matrix[dimensionX, dimensionY, dimensionZ] = isAlive;
+        }
+
+        public void Dispose()
+        {
+            _regex = null;
         }
     }
 }

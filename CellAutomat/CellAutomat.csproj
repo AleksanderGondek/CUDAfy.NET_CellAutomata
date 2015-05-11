@@ -48,10 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\AppSettingsHelper.cs" />
+    <Compile Include="Data\AppConfigHelper.cs" />
     <Compile Include="Data\DataCreator.cs" />
     <Compile Include="Data\DataLoader.cs" />
     <Compile Include="Data\DataWriter.cs" />
+    <Compile Include="Data\IDataCreator.cs" />
+    <Compile Include="Data\IDataLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
