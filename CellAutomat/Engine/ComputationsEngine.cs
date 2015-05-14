@@ -48,7 +48,11 @@ namespace CellAutomat.Engine
 
             gpu.LoadModule(km);
 
-            for (var i = 0; i <= Generations; i++)
+            // Save vanilla state of matrix
+            DataHandler.SaveMatrix(Matrix, string.Format(AppConfigHelper.GetValueFromAppSettings(@"CellMatrixOutputLocation"), 0));
+            DataHandler.PrepareVisualisation(string.Format(AppConfigHelper.GetValueFromAppSettings(@"CellMatrixOutputLocation"), 0));
+
+            for (var i = 0; i < Generations; i++)
             {
                 // allocate the memory on the GPU
                 var deviceMatrix = gpu.Allocate(Matrix);
@@ -70,7 +74,8 @@ namespace CellAutomat.Engine
                 gpu.Free(deviceMatrix);
 
                 //Save on disk
-                DataWriter.SaveMatrixAsJs(Matrix, string.Format("MatrixOutput_Gen{0}.js", i));
+                DataHandler.SaveMatrix(Matrix, string.Format(AppConfigHelper.GetValueFromAppSettings(@"CellMatrixOutputLocation"), i + 1));
+                DataHandler.PrepareVisualisation(string.Format(AppConfigHelper.GetValueFromAppSettings(@"CellMatrixOutputLocation"), i + 1));
 
                 // free the memory we allocated on the CPU
                 // Not necessary, this is .NET

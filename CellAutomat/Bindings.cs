@@ -8,8 +8,8 @@ namespace CellAutomat
         public override void Load()
         {
             // Bind stuff right here
-            Bind<IDataCreator>().To<DataCreator>();
-            Bind<IDataLoader>().To<DataLoader>();
+            //Bind<IDataCreator>().To<DataCreator>();
+            //Bind<IDataLoader>().To<DataLoader>();
         }
     }
 }
