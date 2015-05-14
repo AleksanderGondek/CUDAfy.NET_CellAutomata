@@ -1,5 +1,5 @@
 ﻿using System;
-using CellAutomat.Engine;
+using CellAutomat.Input;
 
 namespace CellAutomat
 {
@@ -7,8 +7,13 @@ namespace CellAutomat
     {
         static void Main(string[] args)
         {
-            var a = ComputationsEngine.Matrix;
-            Console.WriteLine("Press a button, dummy!");
+            var intputManager = new InputManager() {Args = args};
+            
+            intputManager.HandleInputArgs();
+
+            Console.WriteLine("Finished work!");
+            Console.WriteLine("Press any key to quit...");
+            
             Console.ReadLine();
         }
     }

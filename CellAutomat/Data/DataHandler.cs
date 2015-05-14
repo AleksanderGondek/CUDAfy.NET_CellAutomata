@@ -11,6 +11,12 @@ namespace CellAutomat.Data
             return JsonConvert.DeserializeObject<bool[, ,]>(textContent);
         }
 
+        public static void SerializeAndSaveMatrix(bool[, ,] matrix, string fileName)
+        {
+            var serializedMatrix = JsonConvert.SerializeObject(matrix);
+            File.WriteAllText(fileName, serializedMatrix);
+        }
+
         public static void SaveMatrix(bool[, ,] matrix, string fileName)
         {
             var serializedMatrix = JsonConvert.SerializeObject(matrix);

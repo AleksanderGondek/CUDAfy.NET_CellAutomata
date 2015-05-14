@@ -57,7 +57,7 @@
     <Compile Include="Data\DataHandler.cs" />
     <Compile Include="Data\IDataCreator.cs" />
     <Compile Include="Engine\ComputationsEngine.cs" />
-    <Compile Include="Engine\EngineRunner.cs" />
+    <Compile Include="Input\InputManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

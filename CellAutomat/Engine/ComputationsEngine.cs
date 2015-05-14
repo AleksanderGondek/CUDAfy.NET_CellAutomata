@@ -1,5 +1,4 @@
-﻿using System;
-using CellAutomat.Data;
+﻿using CellAutomat.Data;
 using Cudafy;
 using Cudafy.Host;
 using Cudafy.Translator;
@@ -42,6 +41,10 @@ namespace CellAutomat.Engine
 
         public static void Execute()
         {
+            CudafyModes.Target = eGPUType.Cuda;
+            CudafyModes.DeviceId = 0;
+            CudafyTranslator.Language = CudafyModes.Target == eGPUType.OpenCL ? eLanguage.OpenCL : eLanguage.Cuda;
+
             var gpu = CudafyHost.GetDevice(CudafyModes.Target);
             var arch = gpu.GetArchitecture();
             var km = CudafyTranslator.Cudafy(arch);
