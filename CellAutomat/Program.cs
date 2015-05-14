@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using CellAutomat.Engine;
-using Ninject;
 
 namespace CellAutomat
 {
@@ -9,9 +7,6 @@ namespace CellAutomat
     {
         static void Main(string[] args)
         {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            EngineRunner.Run();
             var a = ComputationsEngine.Matrix;
             Console.WriteLine("Press a button, dummy!");
             Console.ReadLine();
