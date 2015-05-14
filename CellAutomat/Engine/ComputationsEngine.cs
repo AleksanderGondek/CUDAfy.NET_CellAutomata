@@ -70,7 +70,7 @@ namespace CellAutomat.Engine
                 gpu.Free(deviceMatrix);
 
                 //Save on disk
-                DataWriter.SaveMatrix(Matrix, string.Format("Output_{0}_Gen{1}.txt", DateTime.UtcNow.ToString("yy-MM-dd-HH-mm-ss"), i));
+                DataWriter.SaveMatrixAsJs(Matrix, string.Format("MatrixOutput_Gen{0}.js", i));
 
                 // free the memory we allocated on the CPU
                 // Not necessary, this is .NET

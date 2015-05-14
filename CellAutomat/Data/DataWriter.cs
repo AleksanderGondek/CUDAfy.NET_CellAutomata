@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Newtonsoft.Json;
 
 namespace CellAutomat.Data
 {
@@ -6,27 +7,30 @@ namespace CellAutomat.Data
     {
         internal static void SaveMatrix(bool[,,] matrix, string fileName)
         {
-            using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-            using (var streamWriter = new StreamWriter(fileStream))
-            {
-                var matrixSize = matrix.GetLength(0);
-                streamWriter.WriteLine(matrixSize);
-                for (var z = 0; z < matrixSize; z++)
-                {
-                    for (var x = 0; x < matrixSize; x++)
-                    {
-                        for (var y = 0; y < matrixSize; y++)
-                        {
-                            streamWriter.WriteLine(GetSingleLine(x, y, z, matrix[x,y,z]));
-                        }
-                    }
-                }
-            }
+            var serializedMatrix = JsonConvert.SerializeObject(matrix);
+            File.WriteAllText(fileName, serializedMatrix);
         }
 
-        private static string GetSingleLine(int x, int y, int z, bool value)
+        internal static void SaveMatrixAsJs(bool[,,] matrix, string fileName)
         {
-            return string.Format("{{{0},{1},{2}}}={3}", x, y, z, value.ToString().ToLower());
+            var serializedMatrix = JsonConvert.SerializeObject(matrix);
+            serializedMatrix = ReplaceFirst(serializedMatrix, @"[", "var matrix=[");
+            serializedMatrix = ReplaceLastOccurrence(serializedMatrix, @"]", @"];");
+            File.WriteAllText(fileName, serializedMatrix);
+        }
+
+        public static string ReplaceFirst(string source, string find, string replace)
+        {
+            var place = source.IndexOf(find, System.StringComparison.Ordinal);
+            var result = source.Remove(place, find.Length).Insert(place, replace);
+            return result;
+        }
+
+        public static string ReplaceLastOccurrence(string source, string find, string replace)
+        {
+            var place = source.LastIndexOf(find, System.StringComparison.Ordinal);
+            var result = source.Remove(place, find.Length).Insert(place, replace);
+            return result;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace StartupMatrixCreator
 {
@@ -20,26 +21,25 @@ namespace StartupMatrixCreator
 
         internal void CreateStartupMatrix()
         {
-            using (var fileStream = new FileStream(_fileName, FileMode.Create, FileAccess.Write))
-            using (var streamWriter = new StreamWriter(fileStream))
+            var matrix = new bool[_matrixSize, _matrixSize, _matrixSize];
+            for (var z = 0; z < _matrixSize; z++)
             {
-                streamWriter.WriteLine(_matrixSize);
-                for (var z = 0; z < _matrixSize; z++)
+                for (var x = 0; x < _matrixSize; x++)
                 {
-                    for (var x = 0; x < _matrixSize; x++)
+                    for (var y = 0; y < _matrixSize; y++)
                     {
-                        for (var y = 0; y < _matrixSize; y++)
-                        {
-                            streamWriter.WriteLine(GetSingleLine(x,y,z));
-                        }
+                        matrix[x, y, z] = GetValue();
                     }
                 }
             }
+
+            SaveMatrix(matrix);
         }
 
-        private string GetSingleLine(int x, int y, int z)
+        internal void SaveMatrix(bool[,,] matrix)
         {
-            return string.Format("{{{0},{1},{2}}}={3}", x, y, z, GetValue().ToString().ToLower());
+            var serializedMatrix = JsonConvert.SerializeObject(matrix);
+            File.WriteAllText(_fileName, serializedMatrix);
         }
 
         private bool GetValue()
