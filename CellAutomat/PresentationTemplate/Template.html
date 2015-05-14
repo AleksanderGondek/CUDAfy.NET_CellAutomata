@@ -67,9 +67,9 @@
 							if(matrix[x][y][z] === true)
 							{
 								var mesh = new THREE.Mesh( geometry, material );
-								mesh.position.x = x * 100;
-								mesh.position.y = y * 100;
-								mesh.position.z = z * 100;
+								mesh.position.x = (x * 100) - (matrix.length/2);
+								mesh.position.y = (y * 100) - (matrix.length/2);
+								mesh.position.z = (z * 100) - (matrix.length/2);
 								mesh.rotation.x = 0;
 								mesh.rotation.y = 0;
 								mesh.matrixAutoUpdate = false;
@@ -83,7 +83,7 @@
 				scene.add( group );
 
 				renderer = new THREE.CanvasRenderer();
-				renderer.setClearColor( 0xffffff );
+				renderer.setClearColor( 0x686868 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
@@ -136,13 +136,7 @@
 				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 				camera.lookAt( scene.position );
 
-				var currentSeconds = Date.now();
-				group.rotation.x = Math.sin( currentSeconds * 0.0007 ) * 0.5;
-				group.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.5;
-				group.rotation.z = Math.sin( currentSeconds * 0.0002 ) * 0.5;
-
 				renderer.render( scene, camera );
-
 			}
 
 		</script>
